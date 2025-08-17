@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    
+    
+      <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>Scholar - Online School HTML5 Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+  
+<!--
+
+TemplateMo 586 Scholar
+
+https://templatemo.com/tm-586-scholar
+
+-->
+    <style>
+        
+        .family-tree {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            position: relative;
+        }
+        .person.ancestor {
+            background: linear-gradient(135deg, #00b4b8, #00a8a8) !important;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 180, 184, 0.3) !important;
+        }
+
+        .person.ancestor:hover {
+            background: linear-gradient(135deg, #00d4d8, #00b4b8) !important;
+            box-shadow: 0 8px 25px rgba(0, 212, 216, 0.4) !important;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c5aa0;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        
+
+        .person {
+            background: linear-gradient(135deg, #283c5b, #0fc856);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            min-width: 150px;
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(44, 90, 160, 0.3);
+            border: 2px solid transparent;
+        }
+
+        .person.special {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
+        }
+
+        .person.special:hover {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            box-shadow: 0 8px 25px rgba(243, 156, 18, 0.4);
+        }
+
+        .person:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(44, 90, 160, 0.4);
+            border-color: #4a90e2;
+            background: linear-gradient(135deg, #4a90e2, #2c5aa0);
+        }
+
+        .person.highlighted {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3); }
+            50% { box-shadow: 0 8px 30px rgba(231, 76, 60, 0.6); }
+            100% { box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3); }
+        }
+
+        /* Arrow styles */
+        .arrow {
+            position: relative;
+            margin: 10px 0;
+        }
+
+        .arrow::after {
+            content: '';
+            position: absolute;
+            left: 1%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 15px solid #2c5aa0;
+            animation: arrowBounce 2s infinite;
+        }
+
+        
+
+        .generation {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            width: 50%;
+            position: relative;
+        }
+
+        .branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .children {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-right: 20px;
+        }
+
+        .branch-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Connection lines */
+        .connection-line {
+            position: absolute;
+            background-color: #2c5aa0;
+            z-index: -1;
+        }
+
+     
+
+       
+
+        .second-generation {
+            position: relative;
+        }
+
+        
+
+        .third-generation {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1000px;
+            position: relative;
+        }
+
+        .left-branch, .center-branch, .right-branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .left-branch::before, .center-branch::before, .right-branch::before {
+            content: '';
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 35px;
+            background-color: #2c5aa0;
+        }
+
+        /* Horizontal connecting line for third generation */
+        .third-generation::before {
+            content: '';
+            position: absolute;
+            top: -35px;
+            left: 11%;
+            right: 8.5%;
+            height: 3px;
+            background-color: #2c5aa0;
+        }
+
+        /* Vertical line connecting to horizontal line */
+        
+
+        .info-panel {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 250px;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(44, 90, 160, 0.2);
+        }
+
+        .info-panel.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .info-panel h3 {
+            color: #2c5aa0;
+            margin-bottom: 10px;
+        }
+
+        .info-panel p {
+            color: #555;
+            line-height: 1.5;
+        }
+        /* ======= HEADER GENERAL ======= */
+.header-area {
+  background: #1a1a1a;
+  padding: 10px 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+.header-sticky {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ======= LOGO ======= */
+.header-area .logo h1 {
+  color: #000000;
+  font-size: 22px;
+  margin: 0;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+/* ======= MENU ======= */
+.main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main-nav ul.nav {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+}
+
+.main-nav ul.nav li {
+  position: relative;
+}
+
+.main-nav ul.nav li a {
+  color: #000000;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.3s;
+  padding: 5px 10px;
+}
+
+.main-nav ul.nav li a:hover,
+.main-nav ul.nav li a.active {
+  color: #ffcc00;
+}
+
+/* ======= BARRE DE RECHERCHE ======= */
+.search-input {
+  position: relative;
+  margin-left: 20px;
+}
+
+.search-input form {
+  display: flex;
+  align-items: center;
+}
+
+.search-input input[type="text"] {
+  padding: 8px 35px 8px 10px;
+  border-radius: 4px;
+  border: none;
+  font-size: 14px;
+  outline: none;
+}
+
+.search-input i {
+  position: absolute;
+  right: 10px;
+  color: #000000;
+  font-size: 16px;
+  pointer-events: none;
+}
+
+/* ======= MENU RESPONSIVE ======= */
+.menu-trigger {
+  display: none;
+  color: #000000;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 768px) {
+  .main-nav ul.nav {
+    display: none;
+    flex-direction: column;
+    background: #1a1a1a;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 200px;
+    padding: 10px;
+  }
+
+  .main-nav ul.nav li {
+    margin-bottom: 10px;
+  }
+
+  .menu-trigger {
+    display: block;
+  }
+}
+
+        
+
+        
+        
+    </style>
+    
+</head>
+<body>
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <h1> أهل الحاج المختار</h1>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Serach Start ***** -->
+                    <div class="search-input">
+                      <form id="search" action="#">
+                        <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
+                        <i class="fa fa-search"></i>
+                      </form>
+                    </div>
+                    <!-- ***** Serach Start ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                      <li class="scroll-to-section"><a href="index1.html" class="active">شجرة العائلة</a></li>
+                      <li class="scroll-to-section"><a href="#services">Services</a></li>
+                      <li class="scroll-to-section"><a href="#courses">Courses</a></li>
+                      <li class="scroll-to-section"><a href="#team">Team</a></li>
+                      <li class="scroll-to-section"><a href="#events">Events</a></li>
+                      <li class="scroll-to-section"><a href="#contact">Register Now!</a></li>
+                  </ul>   
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+<div class="container">
+        <h1>شجرة العائلة</h1>
+        
+        <div class="family-tree">
+            <!-- First Generation (Ancestor) -->
+            <div class="person ancestor" data-info="الجد الأكبر للعائلة">الحاج المختار</div>
+            <div class="arrow"></div>
+            
+            
+            <!-- Second Generation -->
+            <div class="person special">
+                <div class="person" data-info="ابن الجد الأكبر">محمد</div>
+            </div>
+            <div class="arrow"></div>
+            
+            <!-- Third Generation -->
+            <div class="person special">
+                <div class="person" data-info="ابن محمد">عبد الرحمن</div>
+            </div>
+            <div class="arrow"></div>
+            
+            <!-- Fourth Generation -->
+
+            <div class="person special" >
+                <div class="person" data-info="أحد أبناء الجيل الرابع">لامهم بنت لغجل من لعويسيات</div>
+            </div>
+            
+            
+            <!-- Fifth Generation -->
+            <div class="generation third-generation">
+                <div class="left-branch">
+                    <div class="branch-container">
+                        <div class="person special" data-info="أحد أبناء أحمد محمود">المختار</div>
+                        <div class="arrow"></div>
+                        <div class="children">
+                            <div class="person" data-info="ابن المختار">سيدي - دداه</div>
+                            <div class="person" data-info="ابن المختار">محمد -حمهاه</div>
+                            <div class="person" data-info="ابن المختار">احمد الحاج</div>
+                            <div class="person" data-info="ابن المختار">حورية</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="center-branch">
+                    <div class="branch-container">
+                        <div class="person special" data-info="أحد أبناء الجيل الخامس">سيد أحمد</div>
+                        <div class="arrow"></div>
+                        <div class="children">
+                            <div class="person" data-info="ابن سيد أحمد">عبد الرحمن</div>
+                            <div class="person" data-info="ابن سيد أحمد">سيد أحمد</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="right-branch">
+                    <div class="branch-container">
+                        <div class="person special" data-info="أحد أبناء الجيل الخامس">احمد مولود</div>
+                        <div class="arrow"></div>
+                        <div class="children">
+                            <div class="person" data-info="ابن المختار">محمد محمود – أهل إبهاه</div>
+                            <div class="person" data-info="ابن المختار">سيد أحمد – أهل شاده</div>
+                            <div class="person" data-info="معلومة إضافية">عبد الرحمن – أهل دحمان</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-panel" id="infoPanel">
+        <h3 id="infoTitle"></h3>
+        <p id="infoText"></p>
+    </div>
+
+    
+        
+  
+</body>
+</html>

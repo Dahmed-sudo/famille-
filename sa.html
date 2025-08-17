@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شجرة العائلة التفاعلية - المختار بن سيدي</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Amiri', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            padding: 40px;
+            overflow-x: auto;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 3em;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .legend {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .legend-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .legend-text {
+            color: #555;
+            font-size: 1.1em;
+        }
+
+        .tree-container {
+            display: flex;
+            gap: 30px;
+            padding: 20px;
+            min-height: 800px;
+            max-height: 1200px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
+            border-radius: 15px;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
+        .family-column {
+            display: flex;
+            flex-direction: column;
+            min-width: 280px;
+            max-width: 320px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+            max-height: 1100px;
+        }
+
+        .family-column:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .parent-card {
+            background: linear-gradient(145deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .parent-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .parent-card.patriarch {
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+            font-size: 1.3em;
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+        }
+
+        .parent-card.patriarch:hover {
+            box-shadow: 0 12px 35px rgba(231, 76, 60, 0.4);
+        }
+
+        .parent-name {
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .parent-details {
+            font-size: 0.95em;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .toggle-icon {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-icon:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        .children-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            opacity: 1;
+            max-height: none;
+            overflow-y: auto;
+            transition: all 0.5s ease;
+            flex: 1;
+        }
+
+        .children-container.hidden {
+            opacity: 0;
+            max-height: 0;
+            margin-top: 0;
+            overflow: hidden;
+        }
+
+        .child-card {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border: 2px solid #e3f2fd;
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .child-card:hover {
+            transform: translateX(-5px);
+            border-color: #2196f3;
+            box-shadow: 0 5px 20px rgba(33, 150, 243, 0.2);
+        }
+
+        .child-card.generation-2 {
+            border-color: #4caf50;
+            background: linear-gradient(145deg, #e8f5e8, #ffffff);
+        }
+
+        .child-card.generation-2:hover {
+            border-color: #388e3c;
+            box-shadow: 0 5px 20px rgba(76, 175, 80, 0.2);
+        }
+
+        .child-card.generation-3 {
+            border-color: #ff9800;
+            background: linear-gradient(145deg, #fff3e0, #ffffff);
+        }
+
+        .child-card.generation-3:hover {
+            border-color: #f57c00;
+            box-shadow: 0 5px 20px rgba(255, 152, 0, 0.2);
+        }
+
+        .child-card.generation-4 {
+            border-color: #e91e63;
+            background: linear-gradient(145deg, #fce4ec, #ffffff);
+        }
+
+        .child-card.generation-4:hover {
+            border-color: #c2185b;
+            box-shadow: 0 5px 20px rgba(233, 30, 99, 0.2);
+        }
+
+        .child-name {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .child-details {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .connection-line {
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            width: 15px;
+            height: 2px;
+            background: #667eea;
+            transform: translateY(-50%);
+        }
+
+        .connection-line::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid #667eea;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+
+        .child-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e74c3c;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            font-weight: 700;
+        }
+
+        .search-box {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .search-input {
+            padding: 15px 25px;
+            font-size: 1.2em;
+            border: 3px solid #667eea;
+            border-radius: 30px;
+            width: 400px;
+            text-align: right;
+            font-family: 'Amiri', serif;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #e74c3c;
+            box-shadow: 0 0 20px rgba(231, 76, 60, 0.3);
+            transform: scale(1.02);
+        }
+
+        .highlighted {
+            border-color: #e74c3c !important;
+            box-shadow: 0 0 25px rgba(231, 76, 60, 0.5) !important;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+
+        /* Custom scrollbar for family columns */
+        .family-column::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .family-column::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .family-column::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
+        }
+
+        .family-column::-webkit-scrollbar-thumb:hover {
+            background: #5a67d8;
+        }
+
+        .children-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .children-container::-webkit-scrollbar-track {
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .children-container::-webkit-scrollbar-thumb {
+            background: #dee2e6;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .tree-container {
+                flex-direction: column;
+                gap: 20px;
+                max-height: none;
+            }
+            
+            .family-column {
+                min-width: 100%;
+                max-height: 600px;
+            }
+            
+            .search-input {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">شجرة عائلة المختار بن سيدي التفاعلية</h1>
+        
+        <div class="legend">
+            <div class="legend-title">🔍 كيفية الاستخدام</div>
+            <div class="legend-text">
+                انقر على اسم أي شخص لإظهار أو إخفاء أطفاله • استخدم مربع البحث للعثور على أي عضو في العائلة
+            </div>
+        </div>
+
+        <div class="search-box">
+            <input type="text" class="search-input" placeholder="🔍 ابحث عن اسم في الشجرة..." id="searchInput">
+        </div>
+
+        <div class="stats" id="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalMembers">0</div>
+                <div class="stat-label">إجمالي الأعضاء</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalGenerations">4</div>
+                <div class="stat-label">الأجيال</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="visibleMembers">0</div>
+                <div class="stat-label">الأعضاء المرئيون</div>
+            </div>
+        </div>
+
+        <div class="tree-container" id="treeContainer">
+            <!-- Will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Family tree data structure
+        const familyData = {
+            "المختار بن سيدي": {
+                details: " ام ابناءه اخديجه بنت المختار ولد المالحه الملقبه ابابه",
+                generation: 0,
+                children: {
+                     "سيدي": {
+                        details: "لم يعقب",
+                        generation: 1,
+                        children: {}
+                    },
+                     "محمد سالم": {
+                        details: "لم يعقب",
+                        generation: 1,
+                        children: {}
+                    },
+                    "سيد احمد": {
+                        details: "",
+                        generation: 1,
+                        children: {  
+                            "محمد يحظيه   ": { details: " ام اخديجه منت امحميد", generation: 2, children: {}
+                        },
+                            "سيدي": { details: "امه اخديجه منت امحميد", generation: 2, children: {
+                            "الدحدي":{details:"  امه افطيم منت الدحه ولد حمها",generation:1,children:{
+                            "فاطمة":{details:"  امهم متو منت السالك ولد الدحدي",generation:1,children:{}},
+                            "السالك":{details:"  امهم متو منت السالك ولد الدحدي",generation:1,children:{}},
+                            "محمد لمين":{details:"  امهم متو منت السالك ولد الدحدي",generation:1,children:{}},
+                            " مريم":{details:"  امهم متو منت السالك ولد الدحدي",generation:1,children:{}},
+                               
+
+                            }},
+                            "اوليده":{details:" امه افطيم منت الدحه ولد حمها",generation:1,children:{
+                            "السالك":{details:"  امهم مريم منت محمد الحسن ولد محمود الملقب امحاسن   ",generation:1,children:{
+                                
+                            }}, 
+                            "سيدي":{details:"    امهم مريم منت محمد الحسن ولد محمود الملقب امحاسن  ",generation:1,children:{}}, 
+                            "فاطمة":{details:"    امهم مريم منت محمد الحسن ولد محمود الملقب امحاسن  ",generation:1,children:{}},
+                            "متو":{details:"    امهم مريم منت محمد الحسن ولد محمود الملقب امحاسن  ",generation:1,children:{}},
+                            "محمد لمين":{details:"    امهم مريم منت محمد الحسن ولد محمود الملقب امحاسن  ",generation:1,children:{}},
+                            "خدجوه":{details:"    امهم مريم منت محمد الحسن ولد محمود الملقب امحاسن  ",generation:1,children:{}},
+                            "الدحدي":{details:"    امهم مريم منت محمد الحسن ولد محمود الملقب امحاسن  ",generation:1,children:{}},
+                            " امحاسن":{details:"    امهم مريم منت محمد الحسن ولد محمود الملقب امحاسن  ",generation:1,children:{}},
+                            
+                            }},
+                            "محمد":{details:"  امه افطيم منت الدحه ولد حمها",generation:1,children:{
+                            "سيدي":{details:"   امه فاطمة منت  ابهاه      ",generation:1,children:{}}, 
+                            "فاطمة":{details:"   امه فاطمة منت  ابهاه      ",generation:1,children:{}},
+                            "محمد عالي":{details:"   امه فاطمة منت  ابهاه      ",generation:1,children:{}},
+                            " اعلي":{details:"   امه فاطمة منت  ابهاه      ",generation:1,children:{}},
+                            
+
+                               
+                            }},
+
+
+                        } },
+                            "المختار": { details: "امه اخديجه منت امحميد ", generation: 2, children: {} },
+                            "محمد محمود": { details: " امه الغالية منت ابهاه ولد محمد سالم ولد ابها", generation: 2, children: {
+                            "تومنه اسرة اهل الفيلالي":{details:"  البهجه منت احبيب ",generation:1,children:{}},
+                            "افيتي اسرة اهل بيروك":{details:"  البهجه منت احبيب  ",generation:1,children:{}},
+                            "  امغيني اسرة اهل الكيحل ":{details:"  البهجه منت احبيب  ",generation:1,children:{}},
+                            "محمد سالم الملقب سالم":{details:"  البهجه منت احبيب  ",generation:1,children:{
+                            "فاطمة السالكة": {details:"    امهم مريم منت ايده ولد محمد احمد ولد ابهاه  ",generation:1,children:{}},
+                            "البهجه ": {details:"    امهم مريم منت ايده ولد محمد احمد ولد ابهاه  ",generation:1,children:{}}  
+                            }},
+                            "فاطمة اسرة محفوظ ولد احمد زلد ازوين":{details:"  البهجه منت احبيب  ",generation:1,children:{}},
+                            "اديده اسرة حماده ولد الحافظ":{details:"  البهجه منت احبيب  ",generation:1,children:{}},
+                            "خدامه اسرة اهل انقية":{details:"  البهجه منت احبيب  ",generation:1,children:{}},
+                            "مريم اسرة اهل لعبيد":{details:"  البهجه منت احبيب  ",generation:1,children:{}},
+                            } },
+                            "السالك": { details: "امهم الغالية منت ابهاه ولد محمد سالم ولد ابها", generation: 2, children: {
+                            "الحافظ": { details: "  صفية بنت احمد  الحاج", generation: 2, children: {} },
+                            "محمد": { details: "  صفية بنت احمد  الحاج   ", generation: 2, children: {
+                            "تسلم": { details: " زينب بنت حمود ولد الهادي  ", generation: 2, children: {}},
+                            "السالك": { details: "     امهم لخذيره منت ابهاه  ", generation: 2, children: {}},
+                            "صفية": { details: " امهم لخذيره منت ابهاه  ", generation: 2, children: {}},   
+                            } },
+                            "السيد  ": { details: "", generation: 2, children: {} },
+                            "الحافظ": { details: " صفية بنت احمد  الحاج", generation: 2, children: {} },
+                            "متو": { details: "مريم بنت السيد", generation: 2, children: {} },
+                            "ابراهيم": { details: "امهم صفية منت سيدي ولد سيد المين", generation: 2, children: {} },
+                            "خدجوه": { details: " امهم صفية منت سيدي ولد سيد المين ", generation: 2, children: {} },
+                            "زينب": { details: "امهم صفية منت سيدي ولد سيد المين ", generation: 2, children: {} },
+                            "سيد احمد": { details: " امهم صفية منت سيدي ولد سيد المين", generation: 2, children: {
+                            "عيشه": { details: "  امهم النمه منت  السالك ولد ابراهيم ولد دحمان   ", generation: 2, children: {}},
+                            "السالك": { details: "  امهم النمه منت  السالك ولد ابراهيم ولد دحمان   ", generation: 2, children: {}},
+                            "ابراهيم": { details: "  امهم النمه منت  السالك ولد ابراهيم ولد دحمان   ", generation: 2, children: {}},    
+                            } },
+                            "لاربا س": { details: "امهم صفية منت سيدي ولد سيد المين", generation: 2, children: {
+                            "السالك": { details: " امهم خادجة منت محمد سالم ولد حمهاه", generation: 2, children: {}},
+                            "سيدي": { details: " امهم خادجة منت محمد سالم ولد حمهاه", generation: 2, children: {}},    
+                            } },
+                            "سيدي": { details: "امهم صفية منت سيدي ولد سيد المين", generation: 2, children: {} },
+                            "صدام": { details: "امهم صفية منت سيدي ولد سيد المين", generation: 2, children: {} },
+                            "الغالية": { details: "امهم صفية منت سيدي ولد سيد المين", generation: 2, children: {} },
+                            "ربيع": { details: "امهم صفية منت سيدي ولد سيد المين", generation: 2, children: {} },
+                            "مريم": { details: "   امهم صفية منت سيدي ولد سيد المين ", generation: 2, children: {} },
+                            "جميله": { details: "   امهم صفية منت سيدي ولد سيد المين ", generation: 2, children: {} }
+                                
+                            } },
+                            "فاطمه السالكه": { details: "امهم الغالية منت ابهاه ولد محمد سالم ولد ابها", generation: 2, children: {} },
+                            "مريم": { details: "امهم الغالية منت ابهاه ولد محمد سالم ولد ابها ", generation: 2, children: {} },
+                            "إبراهيم": { details: "امهم الغالية منت ابهاه ولد محمد سالم ولد ابها", generation: 2, children: {
+                            "سيد احمد": { details: "     منت جوزيف      ", generation: 2, children: {} },
+                            " متو": { details: "     امهم فاطمة منت لحلو ولد ابهاه      ", generation: 2, children: {} },   
+                            "السالك ": { details: "     امهم فاطمة منت لحلو ولد ابهاه       ", generation: 2, children: {} },   
+                            " اديده": { details: "     امهم فاطمة منت لحلو ولد ابهاه", generation: 2, children: {} },
+                            " ابوه-لحلو": { details: "     امهم فاطمة منت لحلو ولد ابهاه", generation: 2, children: {} }, 
+                            " ممين": { details: "     امهم فاطمة منت لحلو ولد ابهاه", generation: 2, children: {} },        
+
+                            } },
+                            "خدجوه": { details: "امهم الغالية منت ابهاه ولد محمد سالم ولد ابها", generation: 2, children: {} },
+                            "ربيعة": { details: "امهم الغالية منت ابهاه ولد محمد سالم ولد ابها", generation: 2, children: {} },
+                            "متو": { details: "امهم الغالية منت ابهاه ولد محمد سالم ولد ابها", generation: 2, children: {} }
+                            
+                        }
+                    },
+                    "إبراهيم": {
+                        details: "",
+                        generation: 1,
+                        children: {
+                            "السالك": { details: "امه فاطمة بنت سيداحمد ولد حمهاه   ", generation: 2, children: {
+                            "إبراهيم": { details: "امه ابيب بنت محمد الشيخ ولد السيد ولد   دداه", generation: 2, children: {}} ,    
+                            }},
+                            
+                            "سيد ": { details: "  امه خداجه بنت بيبي ", generation: 2, children: {} }
+                        
+                        }
+                    },
+                    "عبد الرحمن": {
+                        details: "لم يعقب",
+                        generation: 1,
+                        children: {}
+                    },
+                    "السالك": {
+                        details: "",
+                        generation: 1,
+                        children: {
+                            "متو ام ابناء احمد سالم احمدناه": { details: "  صفية بنت احمد  الحاج", generation: 2, children: {} },
+                            " فاطمة ام ابناء اعمر ولد ازوين" : { details: "       ام الفضلي منت سيد اعلي - اكدال   ", generation: 2, children: {} },
+                            "محمد الملقب اباه  ": { details: " ام الفضلي منت سيد اعلي - اكدال", generation: 2, children: {} },
+                            "  سيد احمد الملقب كازه  لم يعقب  ": { details: " ام الفضلي منت سيد اعلي - اكدال", generation: 2, children: {} },
+                            "  عالي        ": { details:  " ام الفضلي منت سيد اعلي - اكدال", generation: 2, children: {} },
+                            "  اخديجه ام ابناء احمد ولد الزين ": { details:  " ام الفضلي منت سيد اعلي - اكدال", generation: 2, children: {} },
+                            "محمد لمين الملقب ممين ": { details:  " ام الفضلي منت سيد اعلي - اكدال", generation: 2, children: {} },
+                            "  خدامه ام ابناء ابراهيم ولد ازوين        ": { details:  " ام الفضلي منت سيد اعلي - اكدال", generation: 2, children: {} },
+                            "  ام البنين الملقبة ابيه ام ابن السالك ولد احديد و بنت سيد محمد لبات        ": { details:  " ام الفضلي منت سيد اعلي - اكدال", generation: 2, children: {} },
+                            "  هندوام ابناء ولد البشير        ": { details:  " ام الفضلي منت سيد اعلي - اكدال", generation: 2, children: {} },
+                            "  العالية ام ابناء ولد يحي        ": { details:  " ام الفضلي منت سيد اعلي - اكدال", generation: 2, children: {} },
+                            "  سيدي        ": { details:  " خداجه منت احمد الحاج", generation: 2, children: {} },
+                            "  صباح        ": { details:  " خداجه منت احمد الحاج", generation: 2, children: {} },
+                            "  مولاي        ": { details:  " خداجه منت احمد الحاج", generation: 2, children: {} },
+                            "  جده        ": { details:  " خداجه منت احمد الحاج", generation: 2, children: {} },
+                            "  فاتو ام ابناء فيصل ولد مامون": { details:  " خداجه منت احمد الحاج", generation: 2, children: {} },
+                            "  صفية ام ابناء جمال ولد الحافظ     ": { details:  " خداجه منت احمد الحاج", generation: 2, children: {} },
+
+                            
+                        }
+                    },
+                     "السيد": {
+                        details: "",
+                        generation: 1,
+                        children: {
+                            "محمد الشيخ": { details: "امه السالمه منت شاده الملقبه بابيه", generation: 2, children: {
+                            "سيدي لم يعقب ": { details: " امه امنة بنت محمد ولد محمد الشيخ الملقب خديه ولد شاد", generation: 2, children: {}},
+                            "السالك ": { details: "امه  امنة بنت محمد ولد محمد الشيخ الملقب خديه ولد شاد", generation: 2, children: {
+                                "الشيخ ": { details: "امه  امرييم بنت السالك ولد ابراهيم ولد دحمان", generation: 3, children: {}},
+                                 "ماتبكه ": { details: "امه  امرييم بنت السالك ولد ابراهيم ولد دحمان", generation: 3, children: {}},
+                                  "امنة ": { details: "امه  امرييم بنت السالك ولد ابراهيم ولد دحمان", generation: 3, children: {}},
+                                   "لمينه ": { details: "امه  امرييم بنت السالك ولد ابراهيم ولد دحمان", generation: 3, children: {}},
+                                    
+                                
+                            }},
+                            "ابيب ": { details: "امه  امنة بنت محمد ولد محمد الشيخ الملقب خديه ولد شاد", generation: 2, children: {
+                                "ام ابن السالك ولد ابراهيم دداه و ابناء محمد ولد لحلو ": { details: "", generation: 2, children: {}},
+                                
+                            }},
+                            "محمد - الكحزه ": { details: "امه  امنة بنت محمد ولد محمد الشيخ الملقب خديه ولد شاد", generation: 2, children: {
+                             "السالمه ": { details: "امها فاطمة بنت محمد عالي ولد ابهاه", generation: 3, children: {}},   
+                             "محمد سالم ": { details: " مريم بنت محمدبوي ولد احمد تلوميت", generation: 3, children: {}}, 
+                              "الحافظ  ": { details: " مريم بنت محمدبوي ولد احمد تلوميت", generation: 3, children: {}},
+                               "اكوارو  ": { details: " مريم بنت محمدبوي ولد احمد تلوميت", generation: 3, children: {}},
+                                "الشيخ  ": { details: " مريم بنت محمدبوي ولد احمد تلوميت", generation: 3, children: {}},
+                                 "احمد  ": { details: " مريم بنت محمدبوي ولد احمد تلوميت", generation: 3, children: {}},
+                            }},
+                            "فاطمة - الليمو ": { details: "امه  امنة بنت محمد ولد محمد الشيخ الملقب خديه ولد شاد", generation: 2, children: {}},
+                            "الحافظ ": { details: "امه  امنة بنت محمد ولد محمد الشيخ الملقب خديه ولد شاد", generation: 2, children: {}},
+                               
+                                
+                            
+                            "محمدو ": { details: " امه امنة بنت محمد ولد محمد الشيخ الملقب خديه ولد شاد", generation: 2, children: {
+                                "الشيخ ": { details: " امه سعداني بنت سيدي ولد بدي   ", generation: 2, children: {}},
+                                "سيدي ": { details: " امه سعداني بنت سيدي ولد بدي   ", generation: 2, children: {}},
+
+                            }},
+                            "محمد لغظف ": { details: "امه  امنة بنت محمد ولد محمد الشيخ الملقب خديه ولد شاد", generation: 2, children: {
+                                "امنة ": { details: "امامه بوها دحمان ", generation: 3, children: {}},
+                            }},
+                            " عبد الله": { details: "امه  امنة بنت محمد ولد محمد الشيخ الملقب خديه ولد شاد", generation: 2, children: {}},
+                            "لاله ": { details: "امه  امنة بنت محمد ولد محمد الشيخ الملقب خديه ولد شاد", generation: 2, children: {}},
+                            "عبد القادر - مدو ": { details: "امه  امنة بنت محمد ولد محمد الشيخ الملقب خديه ولد شاد", generation: 2, children: {}},
+                            "محمد محمود ": { details: "امه  امنة بنت محمد ولد محمد الشيخ الملقب خديه ولد شاد", generation: 2, children: {}},
+                            
+
+
+                            }},
+                            "أخديجه - أدبه": { details: " امه السالمه منت شاده الملقبه بابيه ", generation: 2, children: {
+                            "ام ابناء محمد السالك ولد كايه": { details: "       ", generation: 2, children: {}},
+                                
+                            } },
+                            "سيد أحمد": { details: "لم يعقب  امه السالمه منت شاده الملقبه بابيه", generation: 2, children: {} },
+                            "مريم": { details: "     امه السالمه منت شاده الملقبه بابيه", generation: 2, children: {
+                            "أم  إبناء محمد سالم  ولد حمهاه": { details: "  ", generation: 2, children: {}},
+
+                            } },
+                            "الحافظ": { details: "امه السالمه منت شاده الملقبه بابيه", generation: 2, children: {
+                             "مريم ": { details: "امها فاطمة بنت الديه ام ابناء احمد ولد كركوب ", generation: 2, children: {}},
+                              "اعل الشيخ ": { details: "امه ميمونه بنت الحافظ ولد دداه  ", generation: 2, children: {
+                                "الحافظ  ": { details: "   اديده بنت ابراهيم ولد الدحدي    ", generation: 3, children: {}},
+                              }},
+                               "اسماعيل  ": { details: "امه ميمونه بنت الحافظ ولد دداه  ", generation: 2, children: {}},
+                                " محمد الشيخ - دبدوب": { details: "امه ميمونه بنت الحافظ ولد دداه  ", generation: 2, children: {}},
+                                 "سيدي  ": { details: "امه ميمونه بنت الحافظ ولد دداه  ", generation: 2, children: {}},
+                                 "فاطمة  ": { details: "امه ميمونه بنت الحافظ ولد دداه  ", generation: 2, children: {}},
+                                 "حماده  ": { details: "امه ميمونه بنت الحافظ ولد دداه  ", generation: 2, children: {}},
+                                
+                            
+                            } },
+                            "السالك - هيداله": { details: "امه السالمه منت شاده الملقبه بابيه", generation: 2, children: {
+                                " السالمه ": { details: "    امها  السيده بنت سيد اعمر   ", generation: 2, children: {}},
+                                "اخديجه  ": { details: "    امها  السيده بنت سيد اعمر   ", generation: 2, children: {}},
+                                "ام المومنين  ": { details: "    امها  السيده بنت سيد اعمر   ", generation: 2, children: {}},
+                                "مريم  ": { details: "    امها  السيده بنت سيد اعمر   ", generation: 2, children: {}},
+                                 "فاتو  ": { details: "    امها  السيده بنت سيد اعمر   ", generation: 2, children: {}},
+                                 "بلاه  ": { details: "    امها  السيده بنت سيد اعمر   ", generation: 2, children: {}},
+                                "ممين  ": { details: "    امها  السيده بنت سيد اعمر   ", generation: 2, children: {}},
+                                "نور ه  ": { details: "    امها  السيده بنت سيد اعمر   ", generation: 2, children: {}},
+
+
+                            } }
+                        }
+                          
+                    },
+                    "الحافظ": {
+                        details: "",
+                        generation: 1,
+                        children: {
+                            "إبراهيم": { details: " امه فاطمة منت اليدا ", generation: 2, children: {
+                                 "الحافظ": { details: "  النجاةاركيبية    ", generation: 2, children: {}},
+                                 "العاليه": { details: "  النجاةاركيبية    ", generation: 2, children: {}},
+                                  "ميمونه": { details: "   مريم بنت محفوظ ولد حمها    ", generation: 2, children: {}},
+                                   "سيدبوي": { details: "   مريم بنت محفوظ ولد حمها    ", generation: 2, children: {}},
+                                   "محفوظ": { details: "   مريم بنت محفوظ ولد حمها    ", generation: 2, children: {}},
+                                   "اعل": { details: "   مريم بنت محفوظ ولد حمها    ", generation: 2, children: {}},
+                                   "حماده": { details: "   مريم بنت محفوظ ولد حمها    ", generation: 2, children: {}},
+
+
+                            } },
+                            "إسماعيل": { details: "    امه  فاطمة منت اليدا لم يعقب", generation: 2, children: {} },
+                            "السالك": { details: "امه  فاطمة منت اليداس", generation: 2, children: {
+                                "فاطمة": { details: " اكرستين اسبانية", generation: 2, children: {}},
+                                "فاطمة": { details: " اكرستين اسبانية", generation: 2, children: {}},
+
+                            }},
+                            "مريم": { details: "امه ابناءه فاطمة منت اليدا", generation: 2, children: {
+                            "ام ابناء السالك ولد حمود حمهاه": { details: " ", generation: 2, children: {}},    
+                            
+                            } },
+                            "المختار - الداه": { details: "امه  فاطمة منت اليدا", generation: 2, children: {} },
+                            "اغلانه": { details: "امه ابناءه فاطمة منت اليدا", generation: 2, children: {
+                            "  ام سهله الشريفه ": { details: " ", generation: 2, children: {}},    
+                            } },
+                            "محمد - حماده": { details: "امه ابناءه فاطمة منت اليدا", generation: 2, children: {} },
+                            "ميمونه": { details: "امه ابناءه فاطمة منت اليدا", generation: 2, children: {
+                             "   ام ابناء الحافظ ولد السيد ولد دداه  ": { details: " ", generation: 2, children: {}},    
+                            } },
+                            "سيد بوي": { details: "امه ابناءه فاطمة منت اليدا", generation: 2, children: {} },
+                            "جمال": { details: "امه ابناءه فاطمة منت اليدا", generation: 2, children: {} },
+                            "امته": { details: "امه ابناءه فاطمة منت اليدا", generation: 2, children: {
+                              "   ام ابناء مولاي ولد السالك ولد دداه": { details: " ", generation: 2, children: {}},   
+                            } },
+                            "خدامه": { details: "امه ابناءه فاطمة منت اليدا", generation: 2, children: {
+                               "  ام ابناء ولد رمظان": { details: " ", generation: 2, children: {}},   
+                            } },
+                            "الطاهره": { details: "امه ابناءه فاطمة منت اليدا", generation: 2, children: {
+                                 "  ام ابناء احمد ولد عبد الله ولد ابهاه   ": { details: " ", generation: 2, children: {}}, 
+                            } },
+                        
+
+                            
+                        }
+                    },    
+                    "محمد محمود": {
+                        details: "توفي صبيا ",
+                        generation: 1,
+                        children: {
+                           
+                        }
+                    },
+                    
+                    
+                    
+                    
+                    
+                   
+                    
+                   
+                }           
+                }
+            }
+      
+
+        function createFamilyColumn(parentName, parentData, isPatriarch = false) {
+            const column = document.createElement('div');
+            column.className = 'family-column';
+            
+            const childrenCount = Object.keys(parentData.children).length;
+            const hasChildren = childrenCount > 0;
+            
+            const parentCard = document.createElement('div');
+            parentCard.className = `parent-card ${isPatriarch ? 'patriarch' : ''}`;
+            parentCard.setAttribute('data-name', parentName);
+            
+            if (hasChildren) {
+                const toggleIcon = document.createElement('div');
+                toggleIcon.className = 'toggle-icon';
+                toggleIcon.innerHTML = '▼';
+                parentCard.appendChild(toggleIcon);
+                
+                const childCount = document.createElement('div');
+                childCount.className = 'child-count';
+                childCount.textContent = childrenCount;
+                parentCard.appendChild(childCount);
+            }
+            
+            const parentNameDiv = document.createElement('div');
+            parentNameDiv.className = 'parent-name';
+            parentNameDiv.textContent = parentName;
+            parentCard.appendChild(parentNameDiv);
+            
+            if (parentData.details) {
+                const parentDetailsDiv = document.createElement('div');
+                parentDetailsDiv.className = 'parent-details';
+                parentDetailsDiv.textContent = parentData.details;
+                parentCard.appendChild(parentDetailsDiv);
+            }
+            
+            column.appendChild(parentCard);
+            
+            if (hasChildren) {
+                const childrenContainer = document.createElement('div');
+                childrenContainer.className = 'children-container';
+                
+                Object.entries(parentData.children).forEach(([childName, childData]) => {
+                    const childCard = document.createElement('div');
+                    childCard.className = `child-card generation-${childData.generation}`;
+                    childCard.setAttribute('data-name', childName);
+                    
+                    const childNameDiv = document.createElement('div');
+                    childNameDiv.className = 'child-name';
+                    childNameDiv.textContent = childName;
+                    childCard.appendChild(childNameDiv);
+                    
+                    if (childData.details) {
+                        const childDetailsDiv = document.createElement('div');
+                        childDetailsDiv.className = 'child-details';
+                        childDetailsDiv.textContent = childData.details;
+                        childCard.appendChild(childDetailsDiv);
+                    }
+                    
+                    const connectionLine = document.createElement('div');
+                    connectionLine.className = 'connection-line';
+                    childCard.appendChild(connectionLine);
+                    
+                    // Add click event for children with their own children
+                    if (Object.keys(childData.children).length > 0) {
+                        childCard.style.cursor = 'pointer';
+                        childCard.style.borderStyle = 'dashed';
+                        
+                        const childCountBadge = document.createElement('div');
+                        childCountBadge.className = 'child-count';
+                        childCountBadge.textContent = Object.keys(childData.children).length;
+                        childCard.appendChild(childCountBadge);
+                        
+                        childCard.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            createAndShowChildColumn(childName, childData);
+                        });
+                    }
+                    
+                    childrenContainer.appendChild(childCard);
+                });
+                
+                column.appendChild(childrenContainer);
+                
+                // Toggle functionality
+                parentCard.addEventListener('click', () => {
+                    const isHidden = childrenContainer.classList.contains('hidden');
+                    childrenContainer.classList.toggle('hidden');
+                    
+                    const toggleIcon = parentCard.querySelector('.toggle-icon');
+                    if (toggleIcon) {
+                        toggleIcon.innerHTML = isHidden ? '▼' : '▲';
+                        toggleIcon.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+                    }
+                    
+                    updateStats();
+                });
+            }
+            
+            return column;
+        }
+        
+        function createAndShowChildColumn(childName, childData) {
+            // Remove existing child columns
+            const existingChildColumns = document.querySelectorAll('.child-column');
+            existingChildColumns.forEach(col => col.remove());
+            
+            if (Object.keys(childData.children).length > 0) {
+                const childColumn = createFamilyColumn(childName, childData);
+                childColumn.classList.add('child-column');
+                childColumn.style.background = 'linear-gradient(145deg, #fff8e1, #ffffff)';
+                childColumn.style.border = '3px solid #ff9800';
+                
+                document.getElementById('treeContainer').appendChild(childColumn);
+                
+                // Scroll to the new column
+                childColumn.scrollIntoView({ behavior: 'smooth', inline: 'end' });
+                
+                updateStats();
+            }
+        }
+
+        function renderFamilyTree() {
+            const treeContainer = document.getElementById('treeContainer');
+            treeContainer.innerHTML = '';
+            
+            Object.entries(familyData).forEach(([parentName, parentData]) => {
+                const column = createFamilyColumn(parentName, parentData, parentName === "المختار بن سيدي");
+                treeContainer.appendChild(column);
+            });
+            
+            updateStats();
+        }
+
+        function countTotalMembers(data = familyData) {
+            let count = 0;
+            
+            function countRecursive(obj) {
+                Object.entries(obj).forEach(([name, data]) => {
+                    count++;
+                    if (data.children && Object.keys(data.children).length > 0) {
+                        countRecursive(data.children);
+                    }
+                });
+            }
+            
+            countRecursive(data);
+            return count;
+        }
+
+        function countVisibleMembers() {
+            const visibleCards = document.querySelectorAll('.parent-card, .child-card');
+            const visibleCount = Array.from(visibleCards).filter(card => {
+                const container = card.closest('.children-container');
+                return !container || !container.classList.contains('hidden');
+            }).length;
+            return visibleCount;
+        }
+
+        function updateStats() {
+            const totalMembers = countTotalMembers();
+            const visibleMembers = countVisibleMembers();
+            
+            document.getElementById('totalMembers').textContent = totalMembers;
+            document.getElementById('visibleMembers').textContent = visibleMembers;
+            
+            // Animate the numbers
+            animateNumber('totalMembers', totalMembers);
+            animateNumber('visibleMembers', visibleMembers);
+        }
+
+        function animateNumber(elementId, targetNumber) {
+            const element = document.getElementById(elementId);
+            const startNumber = parseInt(element.textContent) || 0;
+            const duration = 500;
+            const steps = 20;
+            const stepValue = (targetNumber - startNumber) / steps;
+            let currentStep = 0;
+            
+            const timer = setInterval(() => {
+                currentStep++;
+                const currentNumber = Math.round(startNumber + (stepValue * currentStep));
+                element.textContent = currentNumber;
+                
+                if (currentStep >= steps) {
+                    clearInterval(timer);
+                    element.textContent = targetNumber;
+                }
+            }, duration / steps);
+        }
+
+        // Search functionality
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                const allCards = document.querySelectorAll('[data-name]');
+                
+                // Remove previous highlights
+                allCards.forEach(card => card.classList.remove('highlighted'));
+                
+                if (searchTerm.length > 0) {
+                    let found = false;
+                    allCards.forEach(card => {
+                        const name = card.getAttribute('data-name').toLowerCase();
+                        const detailsElement = card.querySelector('.parent-details, .child-details');
+                        const details = detailsElement ? detailsElement.textContent.toLowerCase() : '';
+                        
+                        if (name.includes(searchTerm) || details.includes(searchTerm)) {
+                            card.classList.add('highlighted');
+                            
+                            // Show parent if child is found
+                            const childrenContainer = card.closest('.children-container');
+                            if (childrenContainer && childrenContainer.classList.contains('hidden')) {
+                                const parentCard = childrenContainer.previousElementSibling;
+                                if (parentCard) {
+                                    parentCard.click();
+                                }
+                            }
+                            
+                            if (!found) {
+                                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                found = true;
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        // Initialize the family tree
+        document.addEventListener('DOMContentLoaded', function() {
+            renderFamilyTree();
+            setupSearch();
+            
+            // Add some initial animations
+            setTimeout(() => {
+                const columns = document.querySelectorAll('.family-column');
+                columns.forEach((column, index) => {
+                    setTimeout(() => {
+                        column.style.opacity = '0';
+                        column.style.transform = 'translateY(50px)';
+                        column.style.transition = 'all 0.6s ease';
+                        
+                        setTimeout(() => {
+                            column.style.opacity = '1';
+                            column.style.transform = 'translateY(0)';
+                        }, 100);
+                    }, index * 100);
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>
