@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقدمة - نسب وشجرة أسرة الحاج المختار</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Amiri', 'Traditional Arabic', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.9;
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            top: -150px;
+            right: -150px;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            bottom: -100px;
+            left: -100px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-decoration: underline;
+            text-underline-offset: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 50px 40px;
+        }
+
+        .intro-paragraph {
+            font-size: 1.2rem;
+            line-height: 2.2;
+            text-align: justify;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #667eea10 0%, #764ba220 100%);
+            border-radius: 15px;
+            border-right: 5px solid #667eea;
+            position: relative;
+        }
+
+        .intro-paragraph::before {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: #667eea;
+            border-radius: 50%;
+            top: -10px;
+            right: -10px;
+            opacity: 0.1;
+        }
+
+        .quran-verse {
+            background: linear-gradient(135deg, #27ae6010 0%, #2ecc7120 100%);
+            border: 3px solid #27ae60;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #27ae60;
+            position: relative;
+        }
+
+        .quran-verse::before {
+            content: '﴿';
+            font-size: 4rem;
+            color: #27ae60;
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            opacity: 0.3;
+        }
+
+        .quran-verse::after {
+            content: '﴾';
+            font-size: 4rem;
+            color: #27ae60;
+            position: absolute;
+            bottom: -20px;
+            left: 20px;
+            opacity: 0.3;
+        }
+
+        .hadith {
+            background: linear-gradient(135deg, #e74c3c10 0%, #c0392b20 100%);
+            border: 3px solid #e74c3c;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #c0392b;
+            text-align: center;
+        }
+
+        .objectives-list {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .objectives-title {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .objective-item {
+            background: white;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-right: 4px solid #3498db;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .objective-item:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .conclusion-section {
+            background: linear-gradient(135deg, #f39c1210 0%, #e67e2220 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            border: 2px solid #f39c12;
+        }
+
+        .highlight-text {
+            color: #e74c3c;
+            font-weight: bold;
+            background: rgba(231, 76, 60, 0.1);
+            padding: 3px 8px;
+            border-radius: 5px;
+        }
+
+        .decorative-line {
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #667eea, #764ba2, transparent);
+            margin: 40px 0;
+            border-radius: 2px;
+        }
+
+        .tree-metaphor {
+            background: linear-gradient(135deg, #16a08510 0%, #f4d03f20 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border-right: 5px solid #16a085;
+            font-size: 1.15rem;
+            position: relative;
+        }
+
+        .tree-metaphor::before {
+            content: '🌳';
+            font-size: 2rem;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            opacity: 0.3;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .content {
+                padding: 30px 25px;
+            }
+            
+            .intro-paragraph,
+            .quran-verse,
+            .hadith {
+                font-size: 1rem;
+                padding: 20px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .intro-paragraph,
+        .quran-verse,
+        .hadith,
+        .objectives-list,
+        .tree-metaphor,
+        .conclusion-section {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .intro-paragraph:nth-child(odd) { animation-delay: 0.1s; }
+        .intro-paragraph:nth-child(even) { animation-delay: 0.2s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>مقدمة</h1>
+        </div>
+        
+        <div class="content">
+            <div class="intro-paragraph">
+                يعد حفظ الأنساب وتوثيقها من الأمور التي اهتم بها العرب منذ القدم، إذ كان علم النسب جزءًا من هويتهم وتراثهم الثقافي. فقد حرصت القبائل العربية على توثيق أنسابها لحفظ صلات القربى، ومعرفة الحقوق والواجبات، وترسيخ الأواصر بين الأفراد والعائلات. وفي هذا الإطار، يأتي تدوين نسب وشجرة <span class="highlight-text">أسرة الحاج المختار</span> كجزء من هذا الإرث العريق، بهدف الحفاظ على التاريخ العائلي وضمان استمرارية المعرفة بالأصول والجذور.
+            </div>
+
+            <div class="quran-verse">
+                يعتبر اهتمام الإسلام بحفظ الأنساب من الكليات الأساسية التي جاءت الشريعة الإسلامية بالحفاظ عليها، وقد أشير له في القرآن؛ فقال تعالى: ﴿يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُم مِّن ذَكَرٍ وَأُنثَىٰ وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا ۚ إِنَّ أَكْرَمَكُمْ عِندَ اللَّهِ أَتْقَاكُمْ ۚ إِنَّ اللَّهَ عَلِيمٌ خَبِيرٌ﴾ [الحجرات: 13]
+            </div>
+
+            <div class="hadith">
+                وقال صلى الله عليه وسلم: ﴿تعلموا من أنسابكم ما تصلون به أرحامكم؛ فإن صلة الرحم محبة في الأهل، مثراة في المال، منسأة في الأثر﴾ [رواه الترمذي وأحمد]
+            </div>
+
+            <div class="decorative-line"></div>
+
+            <div class="intro-paragraph">
+                إن توثيق نسب وشجرة <span class="highlight-text">أسرة الحاج المختار</span> يأتي استكمالاً لهذا الإرث العربي والإسلامي، حيث يساهم في:
+            </div>
+
+            <div class="objectives-list">
+                <div class="objectives-title">أهداف التوثيق</div>
+                <div class="objective-item">- حفظ التاريخ العائلي من الاندثار</div>
+                <div class="objective-item">- تعزيز الروابط بين أفراد الأسرة وتقوية صلة الرحم</div>
+                <div class="objective-item">- توثيق التسلسل الزمني للعائلة عبر الأجيال</div>
+                <div class="objective-item">- تأكيد الانتماء للأسرة، وفق الأصول الصحيحة</div>
+            </div>
+
+            <div class="intro-paragraph">
+                ومن هنا، فإن هذه الوثيقة تهدف إلى تقديم شجرة نسب دقيقة لتسلسل أسرة الحاج المختار، معتمدة على المصادر التاريخية الموثوقة، الوثائق الرسمية، والمشجرات العائلية، إضافة إلى شهادات رجال الفضل العدول ممن تواتر عنهم نقل الأنساب بصدق وأمانة.
+            </div>
+
+            <div class="tree-metaphor">
+                إن حفظ الأنساب ليس مجرد تسجيل للأسماء، بل هو توثيق لرحلة أجيال مضت، وحكاية كفاح وصمود امتدت عبر الزمن، نخلد بصماتهم في صفحات التاريخ. في هذه الشجرة، تتشابك الأسماء كما تتشابك أغصان الشجر، نحمل في جذورها عمق الانتماء، وفي أوراقها امتداد العراقة، لننقل للأجيال أرث الآباء والأجداد، ونرسم لهم طريق الفخر والاعتبار.
+            </div>
+
+            <div class="conclusion-section">
+                إن هذه الوثيقة ليست مجرد سرد للتاريخ، بل جسر يمتد بين الماضي والحاضر، يقرب الأواصر، ويرسخ صلة الرحم، فيكون الوفاء للأجداد نورا يستضيء به الأبناء والأحفاد.
+            </div>
+
+            <div class="intro-paragraph">
+                وبذلك، نضع بين أيديكم توثيقاً أميناً يربط الحاضر بالماضي، ليظل <span class="highlight-text">نسب أسرة الحاج المختار</span> محفوظاً، كما تحفظ الأمانات الغالية، ونثري القصص العظيمة، ونكتب السطور الذهبية في سجل المجد والخلود.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

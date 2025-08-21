@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروع العائلة</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .branches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .branch-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .branch-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+
+        .branch-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .branch-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .branch-card:hover .branch-image img {
+            transform: scale(1.1);
+        }
+
+        .branch-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: white;
+        }
+
+        .branch-card:hover .branch-overlay {
+            opacity: 1;
+        }
+
+        .branch-content {
+            padding: 2rem;
+        }
+
+        .branch-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .branch-info {
+            color: #7f8c8d;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .branch-stats {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        /* Section pour les images en grille */
+        .family-gallery {
+            margin-top: 4rem;
+        }
+
+        .gallery-title {
+            text-align: center;
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 250px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8));
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .branches-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .branch-card {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Effet de particules en arrière-plan */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particules d'arrière-plan -->
+    <div class="particles" id="particles"></div>
+
+    <section class="branches fade-in" id="branches">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">فروع العائلة</h2>
+                <p class="section-subtitle">
+                    استكشف جميع فروع عائلة الحاج المختار وتواصل مع أفرادها
+                </p>
+            </div>
+            
+            <div class="branches-grid">
+                <div class="branch-card" onclick="window.open('dedah.html', '_blank')">
+                    <div class="branch-image">
+                        <img src="https://via.placeholder.com/400x200/1e3c72/ffffff?text=أهل+دداه" alt="أهل دداه">
+                        <div class="branch-overlay">
+                            <i class="fas fa-external-link-alt fa-2x"></i>
+                            <p>اضغط للمزيد</p>
+                        </div>
+                    </div>
+                    <div class="branch-content">
+                        <h3 class="branch-name">أهل دداه</h3>
+                        <p class="branch-info">من نسل المختار بن عبد الرحمن</p>
+                        <div class="branch-stats">
+                            <div class="stat">
+                                <div class="stat-number">150+</div>
+                                <div class="stat-label">أفراد</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">25+</div>
+                                <div class="stat-label">عائلات</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="branch-card" onclick="window.open('hamha.html', '_blank')">
+                    <div class="branch-image">
+                        <img src="https://via.placeholder.com/400x200/e74c3c/ffffff?text=أهل+شاده" alt="أهل شاده">
+                        <div class="branch-overlay">
+                            <i class="fas fa-external-link-alt fa-2x"></i>
+                            <p>اضغط للمزيد</p>
+                        </div>
+                    </div>
+                    <div class="branch-content">
+                        <h3 class="branch-name">أهل شاده</h3>
+                        <p class="branch-info">من نسل أحمد مولود بن عبد الرحمن</p>
+                        <div class="branch-stats">
+                            <div class="stat">
+                                <div class="stat-number">70+</div>
+                                <div class="stat-label">أفراد</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">12+</div>
+                                <div class="stat-label">عائلات</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="branch-card" onclick="window.open('dahman.html', '_blank')">
+                    <div class="branch-image">
+                        <img src="https://via.placeholder.com/400x200/27ae60/ffffff?text=أهل+دحمان" alt="أهل دحمان">
+                        <div class="branch-overlay">
+                            <i class="fas fa-external-link-alt fa-2x"></i>
+                            <p>اضغط للمزيد</p>
+                        </div>
+                    </div>
+                    <div class="branch-content">
+                        <h3 class="branch-name">أهل دحمان</h3>
+                        <p class="branch-info">من نسل أحمد مولود بن عبد الرحمن</p>
+                        <div class="branch-stats">
+                            <div class="stat">
+                                <div class="stat-number">85+</div>
+                                <div class="stat-label">أفراد</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">14+</div>
+                                <div class="stat-label">عائلات</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section galerie inspirée de la section courses -->
+            <div class="family-gallery">
+                <h3 class="gallery-title">معرض العائلة</h3>
+                <div class="gallery-grid">
+                    <div class="gallery-item" onclick="window.open('dedah.html', '_blank')">
+                        <img src="https://via.placeholder.com/400x250/1e3c72/ffffff?text=أهل+دداه" alt="أهل دداه">
+                        <div class="gallery-overlay">
+                            <div>
+                                <h4>أهل دداه</h4>
+                                <p>من نسل المختار بن عبد الرحمن</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" onclick="window.open('hamha.html', '_blank')">
+                        <img src="https://via.placeholder.com/400x250/e74c3c/ffffff?text=أهل+حمحا" alt="أهل حمحا">
+                        <div class="gallery-overlay">
+                            <div>
+                                <h4>أهل حمحا</h4>
+                                <p>فرع من العائلة الكريمة</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" onclick="window.open('ahmedhaj.html', '_blank')">
+                        <img src="https://via.placeholder.com/400x250/f39c12/ffffff?text=أهل+أحمد+الحاج" alt="أهل أحمد الحاج">
+                        <div class="gallery-overlay">
+                            <div>
+                                <h4>أهل أحمد الحاج</h4>
+                                <p>من أعرق فروع العائلة</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" onclick="window.open('bibi.html', '_blank')">
+                        <img src="https://via.placeholder.com/400x250/9b59b6/ffffff?text=أهل+بيبي" alt="أهل بيبي">
+                        <div class="gallery-overlay">
+                            <div>
+                                <h4>أهل بيبي</h4>
+                                <p>فرع مبارك من العائلة</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" onclick="window.open('bahah.html', '_blank')">
+                        <img src="https://via.placeholder.com/400x250/16a085/ffffff?text=أهل+باهاه" alt="أهل باهاه">
+                        <div class="gallery-overlay">
+                            <div>
+                                <h4>أهل باهاه</h4>
+                                <p>من الفروع المميزة</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" onclick="window.open('dahman.html', '_blank')">
+                        <img src="https://via.placeholder.com/400x250/27ae60/ffffff?text=أهل+دحمان" alt="أهل دحمان">
+                        <div class="gallery-overlay">
+                            <div>
+                                <h4>أهل دحمان</h4>
+                                <p>من نسل أحمد مولود بن عبد الرحمن</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Création des particules d'arrière-plan
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 6 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Animation d'apparition progressive
+        function animateCards() {
+            const cards = document.querySelectorAll('.branch-card, .gallery-item');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+        }
+
+        // Effet de parallaxe sur le scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const particles = document.querySelectorAll('.particle');
+            
+            particles.forEach((particle, index) => {
+                const speed = (index % 3 + 1) * 0.3;
+                particle.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            animateCards();
+        });
+
+        // Effet de clic avec ondulation
+        document.querySelectorAll('.branch-card, .gallery-item').forEach(card => {
+            card.addEventListener('click', function(e) {
+                const ripple = document.createElement('div');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255,255,255,0.4)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.left = (e.clientX - e.target.getBoundingClientRect().left) + 'px';
+                ripple.style.top = (e.clientY - e.target.getBoundingClientRect().top) + 'px';
+                ripple.style.width = ripple.style.height = '20px';
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Style CSS pour l'effet ripple
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

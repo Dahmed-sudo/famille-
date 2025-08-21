@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نسب الحاج المختار</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Amiri', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-decoration: underline;
+            text-underline-offset: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .genealogy-text {
+            font-size: 1.1rem;
+            line-height: 2;
+            text-align: justify;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-right: 4px solid #667eea;
+        }
+
+        .genealogy-text:first-child {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .citation {
+            background: #e8f4fd;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            position: relative;
+        }
+
+        .citation::before {
+            content: '"';
+            font-size: 3rem;
+            color: #3498db;
+            position: absolute;
+            top: -10px;
+            right: 10px;
+        }
+
+        .citation-source {
+            text-align: center;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #3498db;
+        }
+
+        .historical-note {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .date-highlight {
+            background: #f39c12;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 0 5px;
+        }
+
+        .names-list {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-right: 5px solid #27ae60;
+        }
+
+        .important-text {
+            font-weight: bold;
+            color: #e74c3c;
+            background: rgba(231, 76, 60, 0.1);
+            padding: 2px 8px;
+            border-radius: 5px;
+        }
+
+        .decorative-line {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            margin: 30px 0;
+            border-radius: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 25px 20px;
+            }
+            
+            .genealogy-text {
+                font-size: 1rem;
+                padding: 15px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .genealogy-text, .citation, .historical-note {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>نسب الحاج المختار</h1>
+        </div>
+        
+        <div class="content">
+            <div class="genealogy-text">
+                هو الحاج المختار بن عبد الله بن إبراهيم الحاج بن الحاج أحمد بن أعبيد بن أمبارك بن محمد بن بل، هكذا عرفه النسابة السيد الفاضل محمد بن أحمد المسلمي التيشيتي سليل أسرة العلم والعلماء.
+            </div>
+
+            <div class="decorative-line"></div>
+
+            <div class="citation">
+                و هناك تعريف آخر مستنبط من كتاب:
+                <div class="citation-source">
+                    Paul Marty, Tribus Maures du Sahel et du Hodh<br>
+                    (Généalogie des Oulad Bella d'Aghreïji)
+                </div>
+            </div>
+
+            <div class="genealogy-text">
+                فهو محمد المختار بن سيدي بن المختار بن إبراهيم بن المختار بن أعبيد بن أمبارك بن محمد بن بل <span class="important-text">(سمي الحاج المختار بعد حجه)</span>.
+            </div>
+
+            <div class="historical-note">
+                و يقول باب السالك بن المختار البلاوي أن أسرة أهل الحاج المختار الموجودة اليوم في السماسيد، تنتسب إلى أولاد بل، فخذ أولاد علول، فالمختار الذي ذهب لأداء فريضة الحج و سمي بعد عودته بالحاج المختار، غادر أهله في الحوض و سكن أدرار و ينتسب إلى علول بن نحان بن محمد بن بل.
+            </div>
+
+            <div class="citation">
+                و هذا القول يؤكده العلامة المختار ولد حامدون، حيث يقول: "وقفنا على سلسلة نسب الحاج المختار المتصلة بإبراهيم بن نحان..."
+            </div>
+
+            <div class="decorative-line"></div>
+
+            <div class="names-list">
+                <strong>و هناك رواية أخرى وردت في كتاب:</strong><br>
+                شجرة أجاكطه من ذرية شنكل ولدعنتر ولد محمد أمباه تأليف محمد ولد باب ولد سيدي
+            </div>
+
+            <div class="genealogy-text">
+                ذكر المؤلف أن الحاج المختار هاجر من تيشيت سنة <span class="date-highlight">1117 هـ (حوالي 1705 م)</span> إبان الحرب التي شبت بين أبناء عمه، أبناء تبال بن أعمر بن أعبيد، وأبناء عمومتهم الحجاج. وقد اعتزل الحاج المختار هذا الخلاف، مما دفعه إلى مغادرة تيشيت والاستقرار في شنقيط، حيث جاور آل شمس الدين.
+            </div>
+
+            <div class="historical-note">
+                تذكر الأخبار المتواترة أن الحاج المختار قد توفي ودفن في مدينة شنقيط، حيث لا تزال سيرته العطرة حاضرة في ذاكرة أهلها. في صيف عام <span class="date-highlight">2015</span>، يوم الأحد الموافق <span class="date-highlight">19 يوليو</span>، انطلقت رحلة إلى مدينة شنقيط برفقة ابن العم محمد أحمد، الملقب بصدام، ولد محمد ولد عالي ولد أبياه، إضافة إلى زميلي الباحث وكاتب الضبط محمد ولد الغاظي، وذلك للبحث عن ضريح الحاج المختار.
+            </div>
+
+            <div class="genealogy-text">
+                بعد نقاشات مستفيضة مع رجالات شنقيط، ومنهم إمام المسجد العتيق، بسلم ولد الحج، ومؤذنه أبت ولد أمد، إضافة إلى عدد من كبار أهل العلم والصلاح، توصلنا إلى أن ضريح الحاج المختار يقع في المقبرة القديمة، <span class="important-text">بالقرب من ضريح شمس الدين، رحمهما الله وجميع من يرقدون في تلك الأرض المباركة</span>.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
