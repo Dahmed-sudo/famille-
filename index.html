@@ -312,6 +312,233 @@ https://templatemo.com/tm-586-scholar
   <script src="assets/js/owl-carousel.js"></script>
   <script src="assets/js/counter.js"></script>
   <script src="assets/js/custom.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // MENU MOBILE TOGGLE
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    
+    if (mobileMenuBtn && navMenu) {
+        mobileMenuBtn.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            
+            // Animation du bouton hamburger
+            const icon = this.querySelector('i');
+            if (icon) {
+                if (navMenu.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+        });
+        
+        // Fermer le menu quand on clique sur un lien
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+    }
+    
+    // SCROLL SMOOTH POUR LES LIENS D'ANCRAGE
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                const headerHeight = document.querySelector('.header').offsetHeight;
+                const targetPosition = targetSection.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // DETECTION DE SCROLL POUR HEADER
+    let lastScrollTop = 0;
+    const header = document.querySelector('.header');
+    
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            // Scroll vers le bas - cacher le header
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            // Scroll vers le haut - montrer le header
+            header.style.transform = 'translateY(0)';
+        }
+        
+        lastScrollTop = scrollTop;
+    });
+    
+    // ANIMATION AU SCROLL
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    // Appliquer l'animation aux éléments
+    const animatedElements = document.querySelectorAll('.events_item, .footer-item');
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+    
+    // GESTION DES IMAGES LAZY LOADING
+    const images = document.querySelectorAll('img[data-src]');
+    const imageObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.remove('lazy');
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+    
+    // GESTION DU RESIZE WINDOW
+    window.addEventListener('resize', function() {
+        // Fermer le menu mobile si ouvert lors du resize
+        if (window.innerWidth > 768) {
+            navMenu.classList.remove('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        }
+    });
+    
+    // TOUCH SWIPE POUR MOBILE
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    document.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    document.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                // Swipe gauche - ouvrir menu
+                if (window.innerWidth <= 768) {
+                    navMenu.classList.add('active');
+                }
+            } else {
+                // Swipe droite - fermer menu
+                navMenu.classList.remove('active');
+            }
+        }
+    }
+    
+    // PRELOADER
+    const preloader = document.getElementById('js-preloader');
+    if (preloader) {
+        window.addEventListener('load', function() {
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        });
+    }
+    
+    // AMELIORATION PERFORMANCE MOBILE
+    // Throttle pour les événements de scroll
+    function throttle(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+    
+    // Appliquer throttle au scroll
+    window.addEventListener('scroll', throttle(function() {
+        // Code de scroll optimisé
+    }, 16)); // ~60fps
+    
+});
 
+// UTILS RESPONSIVE
+function isMobile() {
+    return window.innerWidth <= 768;
+}
+
+function isSmallMobile() {
+    return window.innerWidth <= 480;
+}
+
+// EVENT LISTENER POUR ORIENTATION CHANGE
+window.addEventListener('orientationchange', function() {
+    // Ajuster la hauteur après changement d'orientation
+    setTimeout(() => {
+        window.scrollTo(0, 0);
+    }, 100);
+});
+
+// OPTIMISATION PERFORMANCE
+// Lazy loading images
+function lazyLoadImages() {
+    const images = document.querySelectorAll('img[data-src]');
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const image = entry.target;
+                image.src = image.dataset.src;
+                image.classList.remove('lazy');
+                observer.unobserve(image);
+            }
+        });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+}
+
+// Init lazy loading
+document.addEventListener('DOMContentLoaded', lazyLoadImages);
+</script>
   </body>
 </html>
