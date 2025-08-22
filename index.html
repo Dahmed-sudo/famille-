@@ -6,10 +6,292 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
 
     <title>عائلة الحاج المختار</title>
 
     <style>
+      .citation {
+            background: #e8f4fd;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            position: relative;
+        }
+
+        .citation::before {
+            content: '"';
+            font-size: 3rem;
+            color: #3498db;
+            position: absolute;
+            top: -10px;
+            right: 10px;
+        }
+
+        .citation-source {
+            text-align: center;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #3498db;
+        }
+      /* INTRODUCTION SECTION STYLES */
+.introduction-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    min-height: 100vh;
+}
+
+.intro-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.intro-header {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    padding: 50px 30px;
+    text-align: center;
+    position: relative;
+}
+
+.intro-header::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    top: -150px;
+    right: -150px;
+}
+
+.intro-header::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+    bottom: -100px;
+    left: -100px;
+}
+
+.intro-header h2 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    text-decoration: underline;
+    text-underline-offset: 15px;
+    position: relative;
+    z-index: 1;
+    font-family: 'Amiri', 'Traditional Arabic', 'Times New Roman', serif;
+}
+
+.intro-content {
+    padding: 50px 40px;
+    font-family: 'Amiri', 'Traditional Arabic', 'Times New Roman', serif;
+    line-height: 1.9;
+    color: #2c3e50;
+}
+
+.intro-paragraph {
+    font-size: 1.2rem;
+    line-height: 2.2;
+    text-align: justify;
+    margin-bottom: 30px;
+    padding: 25px;
+    background: linear-gradient(135deg, #667eea10 0%, #764ba220 100%);
+    border-radius: 15px;
+    border-right: 5px solid #667eea;
+    position: relative;
+}
+
+.intro-paragraph::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #667eea;
+    border-radius: 50%;
+    top: -10px;
+    right: -10px;
+    opacity: 0.1;
+}
+
+.quran-verse {
+    background: linear-gradient(135deg, #27ae6010 0%, #2ecc7120 100%);
+    border: 3px solid #27ae60;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 30px 0;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #27ae60;
+    position: relative;
+}
+
+.quran-verse::before {
+    content: '﴿';
+    font-size: 4rem;
+    color: #27ae60;
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    opacity: 0.3;
+}
+
+.quran-verse::after {
+    content: '﴾';
+    font-size: 4rem;
+    color: #27ae60;
+    position: absolute;
+    bottom: -20px;
+    left: 20px;
+    opacity: 0.3;
+}
+
+.hadith {
+    background: linear-gradient(135deg, #e74c3c10 0%, #c0392b20 100%);
+    border: 3px solid #e74c3c;
+    border-radius: 15px;
+    padding: 25px;
+    margin: 30px 0;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #c0392b;
+    text-align: center;
+}
+
+.objectives-list {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 30px 0;
+}
+
+.objectives-title {
+    font-size: 1.4rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.objective-item {
+    background: white;
+    padding: 15px 20px;
+    margin: 15px 0;
+    border-radius: 10px;
+    border-right: 4px solid #3498db;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.objective-item:hover {
+    transform: translateX(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.conclusion-section {
+    background: linear-gradient(135deg, #f39c1210 0%, #e67e2220 100%);
+    border-radius: 15px;
+    padding: 30px;
+    margin: 40px 0;
+    border: 2px solid #f39c12;
+}
+
+.highlight-text {
+    color: #e74c3c;
+    font-weight: bold;
+    background: rgba(231, 76, 60, 0.1);
+    padding: 3px 8px;
+    border-radius: 5px;
+}
+
+.decorative-line {
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #667eea, #764ba2, transparent);
+    margin: 40px 0;
+    border-radius: 2px;
+}
+
+.tree-metaphor {
+    background: linear-gradient(135deg, #16a08510 0%, #f4d03f20 100%);
+    border-radius: 15px;
+    padding: 25px;
+    margin: 30px 0;
+    border-right: 5px solid #16a085;
+    font-size: 1.15rem;
+    position: relative;
+}
+
+.tree-metaphor::before {
+    content: '🌳';
+    font-size: 2rem;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    opacity: 0.3;
+}
+
+/* Responsive pour la section introduction */
+@media (max-width: 768px) {
+    .intro-container {
+        margin: 10px;
+    }
+    
+    .intro-header {
+        padding: 30px 20px;
+    }
+    
+    .intro-header h2 {
+        font-size: 2.2rem;
+    }
+    
+    .intro-content {
+        padding: 30px 25px;
+    }
+    
+    .intro-paragraph,
+    .quran-verse,
+    .hadith {
+        font-size: 1rem;
+        padding: 20px;
+    }
+}
+
+/* Animation pour les éléments de la section introduction */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.intro-paragraph,
+.quran-verse,
+.hadith,
+.objectives-list,
+.tree-metaphor,
+.conclusion-section {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.intro-paragraph:nth-child(odd) { animation-delay: 0.1s; }
+.intro-paragraph:nth-child(even) { animation-delay: 0.2s; }
         * {
             margin: 0;
             padding: 0;
@@ -22,6 +304,7 @@
             color: #333;
             direction: rtl;
             text-align: right;
+            
         }
 
         /* HEADER STYLES */
@@ -197,7 +480,7 @@
 
         /* HERO SECTION */
         .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #8b8b8b 0%, #000000 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -260,7 +543,7 @@
         .hero-description h2 {
             font-size: 1.4rem;
             margin-bottom: 15px;
-            color: rgba(255,255,255,0.9);
+            color: rgba(255, 255, 255, 0.9);
             font-weight: 500;
         }
 
@@ -303,12 +586,12 @@
         /* COURSES SECTION */
         .section.courses {
             padding: 80px 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #8b8b8b 0%, #000000 100%);
             min-height: 100vh;
         }
 
         .arabic-button {
-            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+            background: linear-gradient(135deg, #838a92 0%, #0a0606 100%);
             border: none;
             border-radius: 25px;
             padding: 20px 40px;
@@ -471,6 +754,51 @@
             color: #bdc3c7;
             font-size: 0.9rem;
         }
+        .genealogy-text {
+            font-size: 1.1rem;
+            line-height: 2;
+            text-align: justify;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-right: 4px solid #667eea;
+        }
+
+        .genealogy-text:first-child {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        .names-list {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-right: 5px solid #27ae60;
+        }
+
+        .important-text {
+            font-weight: bold;
+            color: #e74c3c;
+            background: rgba(231, 76, 60, 0.1);
+            padding: 2px 8px;
+            border-radius: 5px;
+        }
+
+        .decorative-line {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            margin: 30px 0;
+            border-radius: 2px;
+        }
+        .historical-note {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
 
         .footer-bottom a {
             color: #3498db;
@@ -526,6 +854,7 @@
 
             .hero-description h2 {
                 font-size: 1rem;
+                
             }
 
             .arabic-button {
@@ -676,10 +1005,10 @@
             
             <nav>
                 <ul class="nav-menu">
-                    <li style="--i: 1;"><a href="mo9adm.html" class="active">الرئيسية</a></li>
-                    <li style="--i: 2;"><a href="neseb.html">النسب</a></li>
+                    <li style="--i: 1;"><a href="#introduction" class="active">مقدمة</a></li>
+                    <li style="--i: 2;"><a href="#introduction2">النسب</a></li>
                     <li style="--i: 3;"><a href="chajere.html">شجرة عائلتنا</a></li>
-                    <li style="--i: 4;"><a href="#">العائلات</a></li>
+                    <li style="--i: 4;"><a href="#courses">العائلات</a></li>
                 </ul>
                 <button class="mobile-menu-btn" aria-label="قائمة التنقل">
                     <i class="fas fa-bars"></i>
@@ -705,23 +1034,125 @@
                 </div>
             </div>
             
-            <div class="hero-visual">
-                <div class="family-tree-preview">
-                    <div class="tree-node">
-                        <strong>المختار</strong>
-                    </div>
-                    <div class="tree-node">
-                        <strong>سيد أحمد</strong><br>
-                        <small>الجد الثاني</small>
-                    </div>
-                    <div class="tree-node">
-                        <strong>أحمد مولود</strong><br>
-                        <small>الجد الثالث</small>
-                    </div>
+           
+        </div>
+    </section>
+    <!-- Introduction Section -->
+<section class="introduction-section" id="introduction">
+    <div class="container">
+        <div class="intro-container">
+            <div class="intro-header">
+                <h2>مقدمة</h2>
+            </div>
+            
+            <div class="intro-content">
+                <div class="intro-paragraph">
+                    يعد حفظ الأنساب وتوثيقها من الأمور التي اهتم بها العرب منذ القدم، إذ كان علم النسب جزءًا من هويتهم وتراثهم الثقافي. فقد حرصت القبائل العربية على توثيق أنسابها لحفظ صلات القربى، ومعرفة الحقوق والواجبات، وترسيخ الأواصر بين الأفراد والعائلات. وفي هذا الإطار، يأتي تدوين نسب وشجرة <span class="highlight-text">أسرة الحاج المختار</span> كجزء من هذا الإرث العريق، بهدف الحفاظ على التاريخ العائلي وضمان استمرارية المعرفة بالأصول والجذور.
+                </div>
+
+                <div class="quran-verse">
+                    يعتبر اهتمام الإسلام بحفظ الأنساب من الكليات الأساسية التي جاءت الشريعة الإسلامية بالحفاظ عليها، وقد أشير له في القرآن؛ فقال تعالى: ﴿يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُم مِّن ذَكَرٍ وَأُنثَىٰ وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا ۚ إِنَّ أَكْرَمَكُمْ عِندَ اللَّهِ أَتْقَاكُمْ ۚ إِنَّ اللَّهَ عَلِيمٌ خَبِيرٌ﴾ [الحجرات: 13]
+                </div>
+
+                <div class="hadith">
+                    وقال صلى الله عليه وسلم: ﴿تعلموا من أنسابكم ما تصلون به أرحامكم؛ فإن صلة الرحم محبة في الأهل، مثراة في المال، منسأة في الأثر﴾ [رواه الترمذي وأحمد]
+                </div>
+
+                <div class="decorative-line"></div>
+
+                <div class="intro-paragraph">
+                    إن توثيق نسب وشجرة <span class="highlight-text">أسرة الحاج المختار</span> يأتي استكمالاً لهذا الإرث العربي والإسلامي، حيث يساهم في:
+                </div>
+
+                <div class="objectives-list">
+                    <div class="objectives-title">أهداف التوثيق</div>
+                    <div class="objective-item">- حفظ التاريخ العائلي من الاندثار</div>
+                    <div class="objective-item">- تعزيز الروابط بين أفراد الأسرة وتقوية صلة الرحم</div>
+                    <div class="objective-item">- توثيق التسلسل الزمني للعائلة عبر الأجيال</div>
+                    <div class="objective-item">- تأكيد الانتماء للأسرة، وفق الأصول الصحيحة</div>
+                </div>
+
+                <div class="intro-paragraph">
+                    ومن هنا، فإن هذه الوثيقة تهدف إلى تقديم شجرة نسب دقيقة لتسلسل أسرة الحاج المختار، معتمدة على المصادر التاريخية الموثوقة، الوثائق الرسمية، والمشجرات العائلية، إضافة إلى شهادات رجال الفضل العدول ممن تواتر عنهم نقل الأنساب بصدق وأمانة.
+                </div>
+
+                <div class="tree-metaphor">
+                    إن حفظ الأنساب ليس مجرد تسجيل للأسماء، بل هو توثيق لرحلة أجيال مضت، وحكاية كفاح وصمود امتدت عبر الزمن، نخلد بصماتهم في صفحات التاريخ. في هذه الشجرة، تتشابك الأسماء كما تتشابك أغصان الشجر، نحمل في جذورها عمق الانتماء، وفي أوراقها امتداد العراقة، لننقل للأجيال أرث الآباء والأجداد، ونرسم لهم طريق الفخر والاعتبار.
+                </div>
+
+                <div class="conclusion-section">
+                    إن هذه الوثيقة ليست مجرد سرد للتاريخ، بل جسر يمتد بين الماضي والحاضر، يقرب الأواصر، ويرسخ صلة الرحم، فيكون الوفاء للأجداد نورا يستضيء به الأبناء والأحفاد.
+                </div>
+
+                <div class="intro-paragraph">
+                    وبذلك، نضع بين أيديكم توثيقاً أميناً يربط الحاضر بالماضي، ليظل <span class="highlight-text">نسب أسرة الحاج المختار</span> محفوظاً، كما تحفظ الأمانات الغالية، ونثري القصص العظيمة، ونكتب السطور الذهبية في سجل المجد والخلود.
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+<section class="introduction-section" id="introduction2">
+    <div class="container">
+        <div class="intro-container">
+            <div class="intro-header">
+                <h2> نسب الحاج المختار</h2>
+            </div>
+            
+            <div class="intro-content">
+                <div class="intro-paragraph">
+                   هو الحاج المختار بن عبد الله بن إبراهيم الحاج بن الحاج أحمد بن أعبيد بن أمبارك بن محمد بن بل، هكذا عرفه النسابة السيد الفاضل محمد بن أحمد المسلمي التيشيتي سليل أسرة العلم والعلماء.
+
+                </div>
+                
+
+                <div class="citation">
+                    و هناك تعريف آخر مستنبط من كتاب:
+                    <div class="citation-source">
+                        Paul Marty, Tribus Maures du Sahel et du Hodh<br>
+                        (Généalogie des Oulad Bella d'Aghreïji)
+                    </div>
+                </div>
+
+                <div class="genealogy-text">
+                فهو محمد المختار بن سيدي بن المختار بن إبراهيم بن المختار بن أعبيد بن أمبارك بن محمد بن بل <span class="important-text">(سمي الحاج المختار بعد حجه)</span>.
+            </div>
+
+            <div class="historical-note">
+                و يقول باب السالك بن المختار البلاوي أن أسرة أهل الحاج المختار الموجودة اليوم في السماسيد، تنتسب إلى أولاد بل، فخذ أولاد علول، فالمختار الذي ذهب لأداء فريضة الحج و سمي بعد عودته بالحاج المختار، غادر أهله في الحوض و سكن أدرار و ينتسب إلى علول بن نحان بن محمد بن بل.
+            </div>
+
+            <div class="citation">
+                و هذا القول يؤكده العلامة المختار ولد حامدون، حيث يقول: "وقفنا على سلسلة نسب الحاج المختار المتصلة بإبراهيم بن نحان..."
+            </div>
+
+            <div class="decorative-line"></div>
+
+            <div class="names-list">
+                <strong>و هناك رواية أخرى وردت في كتاب:</strong><br>
+                شجرة أجاكطه من ذرية شنكل ولدعنتر ولد محمد أمباه تأليف محمد ولد باب ولد سيدي
+            </div>
+
+            <div class="genealogy-text">
+                ذكر المؤلف أن الحاج المختار هاجر من تيشيت سنة <span class="date-highlight">1117 هـ (حوالي 1705 م)</span> إبان الحرب التي شبت بين أبناء عمه، أبناء تبال بن أعمر بن أعبيد، وأبناء عمومتهم الحجاج. وقد اعتزل الحاج المختار هذا الخلاف، مما دفعه إلى مغادرة تيشيت والاستقرار في شنقيط، حيث جاور آل شمس الدين.
+            </div>
+
+            <div class="historical-note">
+                تذكر الأخبار المتواترة أن الحاج المختار قد توفي ودفن في مدينة شنقيط، حيث لا تزال سيرته العطرة حاضرة في ذاكرة أهلها. في صيف عام <span class="date-highlight">2015</span>، يوم الأحد الموافق <span class="date-highlight">19 يوليو</span>، انطلقت رحلة إلى مدينة شنقيط برفقة ابن العم محمد أحمد، الملقب بصدام، ولد محمد ولد عالي ولد أبياه، إضافة إلى زميلي الباحث وكاتب الضبط محمد ولد الغاظي، وذلك للبحث عن ضريح الحاج المختار.
+            </div>
+
+            <div class="genealogy-text">
+                بعد نقاشات مستفيضة مع رجالات شنقيط، ومنهم إمام المسجد العتيق، بسلم ولد الحج، ومؤذنه أبت ولد أمد، إضافة إلى عدد من كبار أهل العلم والصلاح، توصلنا إلى أن ضريح الحاج المختار يقع في المقبرة القديمة، <span class="important-text">بالقرب من ضريح شمس الدين، رحمهما الله وجميع من يرقدون في تلك الأرض المباركة</span>.
+            </div>
+
+
+              
+            </div>
+        </div>
+    </div>
+</section>
+
+    
 
     <!-- Courses Section -->
     <section class="section courses" id="courses">
