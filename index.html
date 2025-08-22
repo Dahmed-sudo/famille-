@@ -28,7 +28,138 @@ https://templatemo.com/tm-586-scholar
 -->
 
 <style>
-  
+    * {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .section.courses {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .arabic-button {
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+            border: none;
+            border-radius: 25px;
+            padding: 20px 40px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .arabic-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .arabic-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .arabic-button:hover::before {
+            left: 100%;
+        }
+        
+        .new-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff4444;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10;
+        }
+        
+        .button-container {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .section-heading {
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .section-subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .arabic-button {
+                padding: 15px 25px;
+                font-size: 16px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        .events_item {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .row.event_box {
+            display: flex;
+            align-items: stretch;
+        }
+        
+        /* Animation d'entrée */
+        .button-container {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .button-container:nth-child(1) { animation-delay: 0.1s; }
+        .button-container:nth-child(2) { animation-delay: 0.2s; }
+        .button-container:nth-child(3) { animation-delay: 0.3s; }
+        .button-container:nth-child(4) { animation-delay: 0.4s; }
+        .button-container:nth-child(5) { animation-delay: 0.5s; }
+        .button-container:nth-child(6) { animation-delay: 0.6s; }
+        .button-container:nth-child(7) { animation-delay: 0.7s; }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
    .logo {
             display: flex;
             align-items: center;
@@ -151,115 +282,79 @@ https://templatemo.com/tm-586-scholar
 
   
 
-  
-  <section class="section courses" id="courses" >
+  <section class="section courses" id="courses">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <div class="section-heading">
-            
-            
-          </div>
-        </div>
-      </div>
-      
-      <div class="row event_box">
-       <a href="dedah.html" class="event-link">
-          <div class="row event_box">
-            <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6 design">
-              <div class="events_item">
-                <div class="thumb">
-                  <img src="assets/images/01.jpg" alt="">
-                  <span class="category"></span>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="section-heading">
+                    <h2 class="section-title">العائلات </h2>
+                    <p class="section-subtitle">   </p>
                 </div>
-                <div class="down-content">
-                  
+            </div>
+        </div>
+        
+        <div class="row event_box justify-content-center">
+            <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer button-container">
+                <div class="events_item">
+                    <a href="dedah.html" class="arabic-button">
+                        
+                     اهل دداه
+                    </a>
                 </div>
-              </div>
             </div>
-          </div>
-        </a>
-        <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6  development">
-          <div class="events_item">
-            <div class="thumb">
-              <a href="hamha.html"><img src="assets/images/02.jpg" alt=""></a>
-              <span class="category"></span>
-              
-            </div>
-            <div class="down-content">
-              
-              
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6 design wordpress">
-          <div class="events_item">
-            <div class="thumb">
-              <a href="ahmedhaj.html"><img src="assets/images/06.jpg" alt=""></a>
-              <span class="category"> </span>
-              
-            </div>
-            <div class="down-content">
-              
             
+            <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer button-container">
+                <div class="events_item">
+                    <a href="hamha.html" class="arabic-button">
+                          اهل حمهاه
+                        <span class="new-badge"></span>
+                    </a>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6 development">
-          <div class="events_item">
-            <div class="thumb">
-              <a href="bibi.html"><img src="assets/images/04.jpg" alt=""></a>
-              <span class="category">   </span>
-              
-            </div>
-            <div class="down-content">
-              
-              <h4></h4>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6 wordpress development">
-          <div class="events_item">
-            <div class="thumb">
-              <a href="bahah.html"><img src="assets/images/03.jpg" alt=""></a>
-              <span class="category"> </span>
-              
-            </div>
-            <div class="down-content">
-              
-              
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6 wordpress design">
-          <div class="events_item">
-            <div class="thumb">
-              <a href="#"><img src="assets/images/07.jpg" alt=""></a>
-              <span class="category"></span>
-              
-            </div>
-            <div class="down-content">
             
- 
+            <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer button-container">
+                <div class="events_item">
+                    <a href="ahmedhaj.html" class="arabic-button">
+                        اهل احمد الحاج    
+                    </a>
+                </div>
             </div>
-          </div>
+            
+            <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer button-container">
+                <div class="events_item">
+                    <a href="bibi.html" class="arabic-button">
+                        اهل بيبي    
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer button-container">
+                <div class="events_item">
+                    <a href="bahah.html" class="arabic-button">
+                         اهل ابهاه     
+                        <span class="new-badge"></span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer button-container">
+                <div class="events_item">
+                    <a href="#" class="arabic-button">
+                        اهل شاده 
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer button-container">
+                <div class="events_item">
+                    <a href="dahman.html" class="arabic-button">
+                         اهل دحمان    
+                    </a>
+                </div>
+            </div>
         </div>
-         <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6 development">
-          <div class="events_item">
-            <div class="thumb">
-              <a href="dahman.html"><img src="assets/images/05.jpg" alt=""></a>
-              <span class="category">    </span>
-              
-            </div>
-            <div class="down-content">
-              
-             
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
+</section>
   
 
   
